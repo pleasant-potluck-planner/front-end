@@ -1,4 +1,8 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
+
+import AddItemForm from "./AddItemForm";
+
+import axios from "axios";
 
 const OrganizerEventUpdate = () => {
   const [eventInfo, setEventInfo] = useState({
@@ -7,6 +11,10 @@ const OrganizerEventUpdate = () => {
     time: "",
     location: "",
     items: [],
+  });
+
+  useEffect(() => {
+    // axios get request to populate input fields with current data
   });
 
   const handleChange = (e) => {
@@ -18,14 +26,18 @@ const OrganizerEventUpdate = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    // axios put request
+    // axios put request to update event info
+  };
+
+  const deleteItem = (itemToDelete) => {
+    // axios delete request to update eventInto.items
   };
 
   return (
     <div>
       <form onSubmit={handleSubmit}>
         <div>
-          <h4>update your event named {state.name}.</h4>
+          <h4>update your event named {eventInfo.name}.</h4>
         </div>
 
         <div>
@@ -63,6 +75,17 @@ const OrganizerEventUpdate = () => {
               onChange={handleChange}
               name="location"
               type="text"
+            />
+          </div>
+          <div>
+            <label>Add Food Item</label>
+            <input onChange={handleChange} name="location" type="text" />
+          </div>
+          <div>
+            <AddItemForm
+              items={eventInfo.items}
+              setEventInfo={setEventInfo}
+              deleteItem={deleteItem}
             />
           </div>
         </div>
