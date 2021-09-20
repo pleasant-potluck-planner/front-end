@@ -84,6 +84,7 @@ const OrganizerEventUpdate = () => {
           <div>
             <AddItemForm
               items={eventInfo.items}
+              eventInfo={eventInfo}
               setEventInfo={setEventInfo}
               deleteItem={deleteItem}
             />

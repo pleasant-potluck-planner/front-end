@@ -3,7 +3,7 @@ import React, { useState } from "react";
 import FoodItem from "./FoodItem";
 
 const AddItemForm = (props) => {
-  const { items, setEventInfo, deleteItem } = props;
+  const { items, eventInfo, setEventInfo, deleteItem } = props;
   const [foodItem, setFoodItem] = useState("");
 
   const handleChange = (e) => {

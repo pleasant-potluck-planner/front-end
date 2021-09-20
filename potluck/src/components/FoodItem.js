@@ -2,7 +2,7 @@ import React from "react";
 
 const FoodItem = (props) => {
   const handleDelete = (e) => {
-    deleteItem(item.id);
+    props.deleteItem(props.item.id);
   };
 
   return (
