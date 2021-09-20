@@ -10,7 +10,12 @@ const OrganizerEventUpdate = () => {
     date: "",
     time: "",
     location: "",
-    items: [],
+    items: [
+      {
+        item: "",
+        volunteer: "",
+      },
+    ],
   });
 
   useEffect(() => {

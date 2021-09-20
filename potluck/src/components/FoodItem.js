@@ -7,7 +7,10 @@ const FoodItem = (props) => {
 
   return (
     <li>
-      {` ${props.item}`} <span onClick={handleDelete}>x</span>
+      {`${props.item.item} `} <span onClick={handleDelete}>x</span>
+      {props.item.volunteer ? (
+        <p>{props.item.volunteer} will bring this.</p>
+      ) : null}
     </li>
   );
 };

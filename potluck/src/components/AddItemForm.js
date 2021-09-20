@@ -4,10 +4,16 @@ import FoodItem from "./FoodItem";
 
 const AddItemForm = (props) => {
   const { items, eventInfo, setEventInfo, deleteItem } = props;
-  const [foodItem, setFoodItem] = useState("");
+  const [foodItem, setFoodItem] = useState({
+    item: "",
+    person: "",
+  });
 
   const handleChange = (e) => {
-    setFoodItem(e.target.value);
+    setFoodItem({
+      ...foodItem,
+      item: e.target.value,
+    });
   };
 
   const handleSubmit = (e) => {
