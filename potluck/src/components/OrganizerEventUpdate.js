@@ -82,10 +82,7 @@ const OrganizerEventUpdate = () => {
               type="text"
             />
           </div>
-          <div>
-            <label>Add Food Item</label>
-            <input onChange={handleChange} name="location" type="text" />
-          </div>
+
           <div>
             <AddItemForm
               items={eventInfo.items}

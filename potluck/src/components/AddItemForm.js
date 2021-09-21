@@ -27,7 +27,7 @@ const AddItemForm = (props) => {
     <div>
       <form onSubmit={handleSubmit}>
         <div>
-          <h4>Add or remove food item to the list.</h4>
+          <h4>Add or remove food item to or from the list.</h4>
         </div>
 
         <div>

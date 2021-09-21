@@ -11,6 +11,7 @@ import "./App.css";
 
 import OrganizerEventUpdate from "./components/OrganizerEventUpdate";
 import GuestEventUpdate from "./components/GuestEventUpdate";
+import MyPotlucks from "./components/MyPotlucks";
 
 function App() {
   return (
@@ -33,8 +34,8 @@ function App() {
 
         <div>
           <Switch>
-            <Route path="/potluck" component={GuestEventUpdate} />
-            <Route path="/create" component={OrganizerEventUpdate} />
+            <Route path="/potluck" component={MyPotlucks} />
+            <Route path="/create" />
           </Switch>
         </div>
       </div>
