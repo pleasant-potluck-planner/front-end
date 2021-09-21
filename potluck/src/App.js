@@ -1,23 +1,20 @@
-import logo from './logo.svg';
 import './App.css';
+import AddEvent from './Components/CreateEvent'
+import React, { useState, useEffect } from 'react'
 
 function App() {
+
+  const [potlucks, setPotlucks] = useState([])
+
+  const onSubmit = (evnt,) => {
+    evnt.preventDefault();
+
+  }
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <h1>Potluck Planner</h1>
+      <AddEvent onSubmit={onSubmit} />
     </div>
   );
 }
