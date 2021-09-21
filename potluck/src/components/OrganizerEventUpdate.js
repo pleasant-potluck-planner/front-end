@@ -6,14 +6,15 @@ import axios from "axios";
 
 const OrganizerEventUpdate = () => {
   const [eventInfo, setEventInfo] = useState({
-    name: "",
-    date: "",
-    time: "",
-    location: "",
+    organizer: "",
+    name: "Richard's Halloween Potluck",
+    date: "Halloween",
+    time: "6 PM",
+    location: "My House",
     items: [
       {
-        item: "",
-        volunteer: "",
+        item: "hamburgers",
+        volunteer: "john",
       },
     ],
   });

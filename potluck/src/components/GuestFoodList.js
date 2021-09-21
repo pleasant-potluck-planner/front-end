@@ -7,7 +7,7 @@ const GuestFoodList = (props) => {
 
   return (
     <li>
-      {`${props.item} `} <span onClick={handleAdd}>+</span>
+      {`${props.food} `} <span onClick={handleAdd}>+</span>
     </li>
   );
 };

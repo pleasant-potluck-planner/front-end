@@ -6,14 +6,24 @@ import axios from "axios";
 
 const GuestEventUpdate = () => {
   const [eventInfo, setEventInfo] = useState({
-    name: "",
-    date: "",
-    time: "",
-    location: "",
-    items: [],
+    organizer: "",
+    name: "Richard's Halloween Potluck",
+    date: "Halloween",
+    time: "6 PM",
+    location: "My House",
+    items: [
+      {
+        item: "hamburgers",
+        volunteer: "john",
+      },
+      {
+        item: "buns",
+        volunteer: "ray",
+      },
+    ],
   });
 
-  const [guestName, setGuestName] = useState("");
+  const [guestName, setGuestName] = useState("ray");
 
   useEffect(() => {
     // axios get request to populate food items guest can select/deselect
@@ -44,10 +54,10 @@ const GuestEventUpdate = () => {
         <div>
           <h4>Thanks for bringing the food items below!</h4>
           <ul>
-            {eventInfo.items.filter((item, index) => {
-              let filteredItem =
-                item.volunteer === guestName; /*the logged in person*/
-              return <li id={index}> {filteredItem} </li>;
+            {eventInfo.items.map((item) => {
+              if (item.volunteer === guestName) {
+                return <li>{item.item}</li>;
+              }
             })}
           </ul>
         </div>
@@ -57,7 +67,7 @@ const GuestEventUpdate = () => {
             {eventInfo.items.map((item, index) => (
               <GuestFoodList
                 id={index}
-                item={item}
+                food={item.item}
                 guestName={guestName}
                 setEventInfo={setEventInfo}
               />
