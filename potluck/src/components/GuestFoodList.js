@@ -7,7 +7,10 @@ const GuestFoodList = (props) => {
 
   return (
     <li>
-      {`${props.food} `} <span onClick={handleAdd}>+</span>
+      {`${props.item.item} `}
+      <span onClick={handleAdd}>
+        {props.item.volunteer === props.guestName ? null : "+"}
+      </span>
     </li>
   );
 };

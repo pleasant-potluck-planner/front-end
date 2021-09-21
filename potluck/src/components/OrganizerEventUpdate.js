@@ -4,21 +4,8 @@ import AddItemForm from "./AddItemForm";
 
 import axios from "axios";
 
-const OrganizerEventUpdate = () => {
-  const [eventInfo, setEventInfo] = useState({
-    organizer: "",
-    name: "Richard's Halloween Potluck",
-    date: "Halloween",
-    time: "6 PM",
-    location: "My House",
-    items: [
-      {
-        item: "hamburgers",
-        volunteer: "john",
-      },
-    ],
-  });
-
+const OrganizerEventUpdate = (props) => {
+  const { eventInfo, setEventInfo } = props;
   useEffect(() => {
     // axios get request to populate input fields with current data
   });

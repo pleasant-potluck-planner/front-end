@@ -4,26 +4,10 @@ import GuestFoodList from "./GuestFoodList";
 
 import axios from "axios";
 
-const GuestEventUpdate = () => {
-  const [eventInfo, setEventInfo] = useState({
-    organizer: "",
-    name: "Richard's Halloween Potluck",
-    date: "Halloween",
-    time: "6 PM",
-    location: "My House",
-    items: [
-      {
-        item: "hamburgers",
-        volunteer: "john",
-      },
-      {
-        item: "buns",
-        volunteer: "ray",
-      },
-    ],
-  });
+const GuestEventUpdate = (props) => {
+  const { eventInfo, setEventInfo } = props;
 
-  const [guestName, setGuestName] = useState("ray");
+  const [guestName, setGuestName] = useState("ray"); // logged in user
 
   useEffect(() => {
     // axios get request to populate food items guest can select/deselect
@@ -54,7 +38,7 @@ const GuestEventUpdate = () => {
         <div>
           <h4>Thanks for bringing the food items below!</h4>
           <ul>
-            {eventInfo.items.map((item) => {
+            {eventInfo.map((item) => {
               if (item.volunteer === guestName) {
                 return <li>{item.item}</li>;
               }
@@ -64,10 +48,10 @@ const GuestEventUpdate = () => {
 
         <div>
           <ul>
-            {eventInfo.items.map((item, index) => (
+            {eventInfo.map((item, index) => (
               <GuestFoodList
                 id={index}
-                food={item.item}
+                item={item}
                 guestName={guestName}
                 setEventInfo={setEventInfo}
               />

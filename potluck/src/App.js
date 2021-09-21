@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import {
   BrowserRouter as Router,
   Route,
@@ -14,6 +14,34 @@ import GuestEventUpdate from "./components/GuestEventUpdate";
 import MyPotlucks from "./components/MyPotlucks";
 
 function App() {
+  const [eventInfo, setEventInfo] = useState([
+    {
+      organizer: "ray",
+      name: "Richard's Halloween Potluck",
+      date: "Halloween",
+      time: "6 PM",
+      location: "My House",
+      guests: [
+        {
+          username: "john",
+        },
+        {
+          username: "bob",
+        },
+      ],
+      items: [
+        {
+          item: "hamburgers",
+          volunteer: "john",
+        },
+        {
+          item: "buns",
+          volunteer: "ray",
+        },
+      ],
+    },
+  ]);
+
   return (
     <Router>
       <div className="homeBackground">
@@ -34,8 +62,40 @@ function App() {
 
         <div>
           <Switch>
-            <Route path="/potluck" component={MyPotlucks} />
-            <Route path="/create" />
+            <Route
+              path="/potluck/orgupdate/:id"
+              render={(props) => (
+                <OrganizerEventUpdate
+                  {...props}
+                  eventInfo={eventInfo}
+                  setEventInfo={setEventInfo}
+                />
+              )}
+            />
+            <Route
+              path="/potluck/guestupdate/:id"
+              render={(props) => (
+                <GuestEventUpdate
+                  {...props}
+                  eventInfo={eventInfo}
+                  setEventInfo={setEventInfo}
+                />
+              )}
+              component={GuestEventUpdate}
+            />
+            <Route
+              path="/potluck"
+              render={(props) => (
+                <MyPotlucks
+                  {...props}
+                  eventInfo={eventInfo}
+                  setEventInfo={setEventInfo}
+                />
+              )}
+            />
+            <Route path="/">
+              <Redirect to="/potluck" />
+            </Route>
           </Switch>
         </div>
       </div>
