@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from "react";
 
+import GuestFoodList from "./GuestFoodList";
+
 import axios from "axios";
 
 const GuestEventUpdate = () => {
@@ -43,7 +45,8 @@ const GuestEventUpdate = () => {
           <h4>Thanks for bringing the food items below!</h4>
           <ul>
             {eventInfo.items.filter((item, index) => {
-              let filteredItem = item.volunteer === volunteer;
+              let filteredItem =
+                item.volunteer === guestName; /*the logged in person*/
               return <li id={index}> {filteredItem} </li>;
             })}
           </ul>
