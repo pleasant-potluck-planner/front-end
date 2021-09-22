@@ -7,9 +7,9 @@ const FoodItem = (props) => {
 
   return (
     <li>
-      {`${props.item.item} `} <span onClick={handleDelete}>x</span>
-      {props.item.volunteer ? (
-        <p>{props.item.volunteer} will bring this.</p>
+      {`${props.item.item_name} `} <span onClick={handleDelete}>x</span>
+      {props.item.guestBringingItem ? (
+        <p>{props.item.guestBringingItem} will bring this.</p>
       ) : null}
     </li>
   );

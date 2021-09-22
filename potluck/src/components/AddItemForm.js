@@ -3,7 +3,7 @@ import React, { useState } from "react";
 import FoodItem from "./FoodItem";
 
 const AddItemForm = (props) => {
-  const { items, eventInfo, setEventInfo, deleteItem } = props;
+  const { items, potluck, setPotluck, deleteItem } = props;
   const [foodItem, setFoodItem] = useState({
     item_name: "",
     guestBringingItem: "",
@@ -17,8 +17,8 @@ const AddItemForm = (props) => {
   };
 
   const handleSubmit = (e) => {
-    setEventInfo({
-      ...eventInfo,
+    setPotluck({
+      ...potluck,
       items: [...items, foodItem],
     });
   };
@@ -37,7 +37,7 @@ const AddItemForm = (props) => {
           </div>
           <div>
             <ul>
-              {props.items.map((item, index) => (
+              {items.map((item, index) => (
                 <FoodItem key={index} item={item} deleteItem={deleteItem} />
               ))}
             </ul>

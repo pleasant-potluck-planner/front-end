@@ -1,72 +1,132 @@
-import './App.css';
-import AddEvent from './Components/CreateEvent'
-import { useState, useEffect } from 'react'
-import { BrowserRouter as Router, Route, NavLink } from "react-router-dom";
-import RegisterForm from "./components/Register";
+import "./App.css";
+// import AddEvent from "./Components/CreateEvent";
+import { useState, useEffect } from "react";
+import {
+  BrowserRouter as Router,
+  Route,
+  NavLink,
+  Switch,
+  Redirect,
+} from "react-router-dom";
+import MyPotlucks from "./components/MyPotlucks";
+import OrganizerEventUpdate from "./components/OrganizerEventUpdate";
+import RegisterForm from "./components/RegisterForm";
 import LoginForm from "./components/Login";
-import { loginImg } from './components/Loginimg' 
-import "./App.css"
+import { loginImg } from "./components/Loginimg";
+import axios from "axios";
+import "./App.css";
 
 function App() {
-  const [potlucks, setPotlucks] = useState([])
+  const [potlucks, setPotlucks] = useState([
+    {
+      potluck_id: 1,
+      potluck_name: "John's Potluck",
+      potluck_location: "John's House",
+      potluck_time: "18:00:00",
+      potluck_date: "2022-02-10",
+      organizer: "John",
+      items: [
+        {
+          item_name: "Chocolate Cake",
+          guestBringingItem: "John",
+        },
+        {
+          item_name: "Red Wine",
+          guestBringingItem: "John",
+        },
+      ],
+    },
+  ]);
 
-  const onSubmit = (evnt,) => {
-    evnt.preventDefault();
-  }
-  
- return (
-      <Router>
-        <div className="App">
-          <div className="appAside">
-            <div className="headerAside">
-            <img src= {loginImg}></img>
-            </div>
-            </div>
-          <div className="appForm">
-            <div className="pageSwitcher">
-              <NavLink
-                to="/sign-in"
-                activeClassName="pageSwitcherItem-active"
-                className="pageSwitcherItem"
-              >
-                Login
-              </NavLink>
-              <NavLink
-                exact
-                to="/"
-                activeClassName="pageSwitcherItem-active"
-                className="pageSwitcherItem"
-              >
-                Register
-              </NavLink>
-            </div>
+  useEffect(() => {
+    axios
+      .get("https://potluck-planner-5.herokuapp.com/api/potlucks")
+      .then((res) => {
+        console.log(res);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  });
 
-            <div className="formTitle">
-              <NavLink
-                to="/sign-in"
-                activeClassName="formTitleLink-active"
-                className="formTitleLink"
-              >
-                Login
-              </NavLink>{" "}
-              or{" "}
-              <NavLink
-                exact
-                to="/"
-                activeClassName="formTitleLink-active"
-                className="formTitleLink"
-              >
-                Register
-              </NavLink>
-            </div>
-
-            <Route exact path="/" component={RegisterForm} />
-            <Route path="/sign-in" component={LoginForm} />
+  return (
+    <Router>
+      <div className="App">
+        <div className="appAside">
+          <div className="headerAside">
+            <img src={loginImg}></img>
           </div>
         </div>
-      </Router>
-    );
-  }
+        <div className="appForm">
+          <div className="pageSwitcher">
+            <NavLink
+              to="/sign-in"
+              activeClassName="pageSwitcherItem-active"
+              className="pageSwitcherItem"
+            >
+              Login
+            </NavLink>
+            <NavLink
+              exact
+              to="/register"
+              activeClassName="pageSwitcherItem-active"
+              className="pageSwitcherItem"
+            >
+              Register
+            </NavLink>
+          </div>
+
+          <div className="formTitle">
+            <NavLink
+              to="/sign-in"
+              activeClassName="formTitleLink-active"
+              className="formTitleLink"
+            >
+              Login
+            </NavLink>{" "}
+            or{" "}
+            <NavLink
+              exact
+              to="/register"
+              activeClassName="formTitleLink-active"
+              className="formTitleLink"
+            >
+              Register
+            </NavLink>
+          </div>
+
+          <Switch>
+            <Route
+              path="/potlucks/orgupdate/:id"
+              render={(props) => (
+                <OrganizerEventUpdate
+                  {...props}
+                  potlucks={potlucks}
+                  setPotlucks={setPotlucks}
+                />
+              )}
+            />
+            <Route
+              path="/potlucks"
+              render={(props) => (
+                <MyPotlucks
+                  {...props}
+                  potlucks={potlucks}
+                  setPotlucks={setPotlucks}
+                />
+              )}
+            />
+
+            <Route path="/register" component={RegisterForm} />
+            <Route path="/sign-in" component={LoginForm} />
+            <Route path="/">
+              <Redirect to="/sign-in" />
+            </Route>
+          </Switch>
+        </div>
+      </div>
+    </Router>
+  );
 }
 
 export default App;

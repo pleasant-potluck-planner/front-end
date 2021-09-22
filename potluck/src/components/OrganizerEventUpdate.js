@@ -6,9 +6,9 @@ import AddItemForm from "./AddItemForm";
 import axios from "axios";
 
 const OrganizerEventUpdate = (props) => {
-  const { eventInfo, setEventInfo } = props;
+  const { potlucks, setPotlucks } = props;
 
-  const [event, setEvent] = useState({
+  const [potluck, setPotluck] = useState({
     potluck_id: 1,
     potluck_name: "John's Potluck",
     potluck_location: "John's House",
@@ -33,8 +33,8 @@ const OrganizerEventUpdate = (props) => {
   });
 
   const handleChange = (e) => {
-    setEvent({
-      ...event,
+    setPotluck({
+      ...potluck,
       [e.target.name]: e.target.value,
     });
   };
@@ -53,14 +53,14 @@ const OrganizerEventUpdate = (props) => {
     <div>
       <form onSubmit={handleSubmit}>
         <div>
-          <h4>update your event named {event.potluck_name}.</h4>
+          <h4>update your event named {potluck.potluck_name}.</h4>
         </div>
 
         <div>
           <div>
             <label>Name</label>
             <input
-              value={event.potluck_name}
+              value={potluck.potluck_name}
               onChange={handleChange}
               name="name"
               type="text"
@@ -69,7 +69,7 @@ const OrganizerEventUpdate = (props) => {
           <div>
             <label>Date</label>
             <input
-              value={event.potluck_date}
+              value={potluck.potluck_date}
               onChange={handleChange}
               name="date"
               type="text"
@@ -78,7 +78,7 @@ const OrganizerEventUpdate = (props) => {
           <div>
             <label>Time</label>
             <input
-              value={event.potluck_time}
+              value={potluck.potluck_time}
               onChange={handleChange}
               name="time"
               type="text"
@@ -87,7 +87,7 @@ const OrganizerEventUpdate = (props) => {
           <div>
             <label>Location</label>
             <input
-              value={event.potluck_location}
+              value={potluck.potluck_location}
               onChange={handleChange}
               name="location"
               type="text"
@@ -96,9 +96,9 @@ const OrganizerEventUpdate = (props) => {
 
           <div>
             <AddItemForm
-              items={event.items}
-              event={event}
-              setEvent={setEvent}
+              items={potluck.items}
+              potluck={potluck}
+              setPotluck={setPotluck}
               deleteItem={deleteItem}
             />
           </div>
@@ -106,7 +106,7 @@ const OrganizerEventUpdate = (props) => {
 
         <div>
           <input type="submit" value="Update Event" />
-          <Link to={"/potluck"}>
+          <Link to={"/potlucks"}>
             <input type="button" value="Cancel" />
           </Link>
         </div>

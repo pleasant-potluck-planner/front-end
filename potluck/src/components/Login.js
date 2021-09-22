@@ -1,14 +1,13 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
 
-
 class LoginForm extends Component {
   constructor() {
     super();
 
     this.state = {
       email: "",
-      password: ""
+      password: "",
     };
 
     this.handleChange = this.handleChange.bind(this);
@@ -21,7 +20,7 @@ class LoginForm extends Component {
     let name = target.name;
 
     this.setState({
-      [name]: value
+      [name]: value,
     });
   }
 
@@ -65,7 +64,7 @@ class LoginForm extends Component {
 
           <div className="formField">
             <button className="formFieldButton">Sign In</button>{" "}
-            <Link to="/" className="formFieldLink">
+            <Link to="/register" className="formFieldLink">
               Create an account
             </Link>
           </div>

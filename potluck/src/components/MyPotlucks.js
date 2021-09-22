@@ -4,9 +4,8 @@ import OrganizerEventList from "./OrganizerEventList";
 import GuestEventList from "./GuestEventList";
 
 const MyPotlucks = (props) => {
-  const { eventInfo, setEventInfo } = props;
+  const { potlucks, setPotlucks } = props;
   const [user, setUser] = useState("John"); // logged in user
-
   return (
     <section>
       <div>
@@ -22,7 +21,7 @@ const MyPotlucks = (props) => {
             </tr>
           </thead>
           <tbody>
-            {eventInfo.map((item) => {
+            {potlucks.map((item) => {
               if (item.organizer === user) {
                 return <OrganizerEventList key={item.potluck_id} item={item} />;
               }
@@ -44,7 +43,7 @@ const MyPotlucks = (props) => {
             </tr>
           </thead>
           <tbody>
-            {eventInfo.map((item) => {
+            {potlucks.map((item) => {
               if (item.organizer === user) {
                 return <GuestEventList key={item.potluck_id} item={item} />;
               }
