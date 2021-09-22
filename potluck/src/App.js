@@ -1,41 +1,20 @@
-
-// import logo from './logo.svg';
-// import './App.css';
-
-// function App() {
-//   return (
-//     <div className="App">
-//       <header className="App-header">
-//         <img src={logo} className="App-logo" alt="logo" />
-//         <p>
-//           Edit <code>src/App.js</code> and save to reload.
-//         </p>
-//         <a
-//           className="App-link"
-//           href="https://reactjs.org"
-//           target="_blank"
-//           rel="noopener noreferrer"
-//         >
-//           Learn React
-//         </a>
-//       </header>
-//     </div>
-//   );
-// }
-
-// export default App;
-
-import React, { Component } from "react";
+import './App.css';
+import AddEvent from './Components/CreateEvent'
+import { useState, useEffect } from 'react'
 import { BrowserRouter as Router, Route, NavLink } from "react-router-dom";
 import RegisterForm from "./components/Register";
 import LoginForm from "./components/Login";
 import { loginImg } from './components/Loginimg' 
+import "./App.css"
 
-import "./App.css";
+function App() {
+  const [potlucks, setPotlucks] = useState([])
 
-class App extends Component {
-  render() {
-    return (
+  const onSubmit = (evnt,) => {
+    evnt.preventDefault();
+  }
+  
+ return (
       <Router>
         <div className="App">
           <div className="appAside">
@@ -88,7 +67,6 @@ class App extends Component {
       </Router>
     );
   }
-
 }
 
 export default App;

@@ -1,0 +1,26 @@
+div {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    box-sizing: border-box;
+}
+
+label {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    text-align: center;
+    margin: 4% 25% 4% 25%;
+    align-items: center;
+}
+
+input {
+    display: inline-block;
+    justify-content: center;
+    color: rgb(253, 31, 105);
+}
+
+button { 
+    margin-right: 3%;
+    color: rgb(253, 31, 105);
+}
