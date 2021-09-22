@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import {
   BrowserRouter as Router,
   Route,
@@ -9,6 +9,8 @@ import {
 
 import "./App.css";
 
+import axios from "axios";
+
 import OrganizerEventUpdate from "./components/OrganizerEventUpdate";
 import GuestEventUpdate from "./components/GuestEventUpdate";
 import MyPotlucks from "./components/MyPotlucks";
@@ -16,31 +18,36 @@ import MyPotlucks from "./components/MyPotlucks";
 function App() {
   const [eventInfo, setEventInfo] = useState([
     {
-      organizer: "ray",
-      name: "Richard's Halloween Potluck",
-      date: "Halloween",
-      time: "6 PM",
-      location: "My House",
-      guests: [
-        {
-          username: "john",
-        },
-        {
-          username: "bob",
-        },
-      ],
+      potluck_id: 1,
+      potluck_name: "John's Potluck",
+      potluck_location: "John's House",
+      potluck_time: "18:00:00",
+      potluck_date: "2022-02-10",
+      organizer: "John",
       items: [
         {
-          item: "hamburgers",
-          volunteer: "john",
+          item_name: "Chocolate Cake",
+          guestBringingItem: "John",
         },
         {
-          item: "buns",
-          volunteer: "ray",
+          item_name: "Red Wine",
+          guestBringingItem: "John",
         },
       ],
     },
   ]);
+
+  // useEffect(() => {
+  //   axios
+  //     .get('https://potluck-planner-5.herokuapp.com/api/potlucks')
+  //     .then(res => {
+  //        console.log(res)
+  //        setEventInfo(res.data)
+  //    })
+  //     .catch(err => {
+  //        console.log(err)
+  //    })
+  // })
 
   return (
     <Router>
@@ -51,7 +58,6 @@ function App() {
               <h1>Potluck Organizer</h1>
             </div>
             <div className="links">
-              <Link to="/home">Home</Link>
               <Link to="/login">Log In</Link>
               <Link to="/logout">Log Out</Link>
               <Link to="/create">Start a Potluck</Link>
