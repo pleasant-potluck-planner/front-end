@@ -9,26 +9,13 @@ const OrganizerEventUpdate = (props) => {
   const { id } = useParams();
 
   const [potluck, setPotluck] = useState({
-    potluck_id: 1,
-    potluck_name: "John's Potluck",
-    potluck_location: "John's House",
-    potluck_time: "18:00:00",
-    potluck_date: "2022-02-10",
-    organizer: "John",
-    items: [
-      {
-        item_name: "Chocolate Cake",
-        guestBringingItem: "John",
-      },
-      {
-        item_name: "Red Wine",
-        guestBringingItem: "John",
-      },
-      {
-        item_name: "hotdogs",
-        guestBringingItem: "",
-      },
-    ],
+    potluck_id: "",
+    potluck_name: "",
+    potluck_location: "",
+    potluck_time: "",
+    potluck_date: "",
+    organizer: "",
+    items: [],
   });
 
   useEffect(() => {
@@ -37,12 +24,13 @@ const OrganizerEventUpdate = (props) => {
     axios
       .get(`https://potluck-planner-5.herokuapp.com/api/potlucks/${id}`)
       .then((res) => {
-        console.log(res);
+        console.log(res.data);
+        setPotluck(res.data);
       })
       .catch((err) => {
         console.log(err);
       });
-  });
+  }, []);
 
   const handleChange = (e) => {
     setPotluck({
