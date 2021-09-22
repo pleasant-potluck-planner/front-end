@@ -1,12 +1,12 @@
 import React, { useState, useEffect } from "react";
-import { Link } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 
 import AddItemForm from "./AddItemForm";
 
 import axios from "axios";
 
 const OrganizerEventUpdate = (props) => {
-  const { potlucks, setPotlucks } = props;
+  const { id } = useParams();
 
   const [potluck, setPotluck] = useState({
     potluck_id: 1,
@@ -24,12 +24,24 @@ const OrganizerEventUpdate = (props) => {
         item_name: "Red Wine",
         guestBringingItem: "John",
       },
+      {
+        item_name: "hotdogs",
+        guestBringingItem: "",
+      },
     ],
   });
 
   useEffect(() => {
     // axios get request to populate input fields with current data
     // get data using id, populate into setEvent
+    axios
+      .get(`https://potluck-planner-5.herokuapp.com/api/potlucks/${id}`)
+      .then((res) => {
+        console.log(res);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
   });
 
   const handleChange = (e) => {

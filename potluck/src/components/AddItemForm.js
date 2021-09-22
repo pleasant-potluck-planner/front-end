@@ -35,13 +35,21 @@ const AddItemForm = (props) => {
             <label>Add Food Item</label>
             <input onChange={handleChange} name="items" type="text" />
           </div>
-          <div>
-            <ul>
+
+          <table>
+            <thead>
+              <tr>
+                <th>Food Items</th>
+                <th>Volunteering Guest</th>
+                <th></th>
+              </tr>
+            </thead>
+            <tbody>
               {items.map((item, index) => (
                 <FoodItem key={index} item={item} deleteItem={deleteItem} />
               ))}
-            </ul>
-          </div>
+            </tbody>
+          </table>
         </div>
 
         <div>

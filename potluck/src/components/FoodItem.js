@@ -1,17 +1,22 @@
 import React from "react";
+import { useParams } from "react-router-dom";
 
 const FoodItem = (props) => {
+  const { id } = useParams();
+
   const handleDelete = (e) => {
-    props.deleteItem(props.item.id);
+    props.deleteItem(id);
   };
 
   return (
-    <li>
-      {`${props.item.item_name} `} <span onClick={handleDelete}>x</span>
-      {props.item.guestBringingItem ? (
-        <p>{props.item.guestBringingItem} will bring this.</p>
-      ) : null}
-    </li>
+    <tr>
+      <td>{props.item.item_name}</td>
+      <td>{props.item.guestBringingItem}</td>
+      <td>
+        <span onClick={handleDelete}></span>
+        {props.item.guestBringingItem ? null : "x"}
+      </td>
+    </tr>
   );
 };
 
