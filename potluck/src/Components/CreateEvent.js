@@ -51,7 +51,7 @@ function AddEvent(props) {
                         placeholder='Set a location'
                     />
                 </label>
-                {/* <label>List Your Items
+                <label>List Your Items
                     <input
                         type='text'
                         name='items'
@@ -59,7 +59,7 @@ function AddEvent(props) {
                         onChange={onChange}
                         placeholder="Add Items ('item')"
                     />
-                </label> */}
+                </label>
                 <button>Invite Friends</button>
                 <input
                     type='submit'
