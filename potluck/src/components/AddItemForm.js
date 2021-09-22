@@ -5,14 +5,14 @@ import FoodItem from "./FoodItem";
 const AddItemForm = (props) => {
   const { items, eventInfo, setEventInfo, deleteItem } = props;
   const [foodItem, setFoodItem] = useState({
-    item: "",
-    person: "",
+    item_name: "",
+    guestBringingItem: "",
   });
 
   const handleChange = (e) => {
     setFoodItem({
       ...foodItem,
-      item: e.target.value,
+      item_name: e.target.value,
     });
   };
 

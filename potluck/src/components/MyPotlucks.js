@@ -1,28 +1,58 @@
 import React, { useState } from "react";
-import OrganizerEventUpdate from "./OrganizerEventUpdate";
-import GuestEventUpdate from "./GuestEventUpdate";
+
+import OrganizerEventList from "./OrganizerEventList";
+import GuestEventList from "./GuestEventList";
 
 const MyPotlucks = (props) => {
   const { eventInfo, setEventInfo } = props;
-  const [user, setUser] = useState("ray"); // logged in user
-  console.log(eventInfo);
+  const [user, setUser] = useState("John"); // logged in user
+
   return (
-    <>
+    <section>
       <div>
         <h3>Your Organized Potlucks</h3>
-        <ul>
-          {eventInfo.map((item, index) => {
-            if (item.organizer === user) {
-              return <li key={index}>{item.name}</li>;
-            }
-          })}
-        </ul>
+        <table>
+          <thead>
+            <tr>
+              <th>Name</th>
+              <th>Date</th>
+              <th>Time</th>
+              <th>Location</th>
+              <th></th>
+            </tr>
+          </thead>
+          <tbody>
+            {eventInfo.map((item) => {
+              if (item.organizer === user) {
+                return <OrganizerEventList key={item.potluck_id} item={item} />;
+              }
+            })}
+          </tbody>
+        </table>
       </div>
 
       <div>
-        <GuestEventUpdate eventInfo={eventInfo} setEventInfo={setEventInfo} />
+        <h3>Potlucks to Attend</h3>
+        <table>
+          <thead>
+            <tr>
+              <th>Name</th>
+              <th>Date</th>
+              <th>Time</th>
+              <th>Location</th>
+              <th></th>
+            </tr>
+          </thead>
+          <tbody>
+            {eventInfo.map((item) => {
+              if (item.organizer === user) {
+                return <GuestEventList key={item.potluck_id} item={item} />;
+              }
+            })}
+          </tbody>
+        </table>
       </div>
-    </>
+    </section>
   );
 };
 

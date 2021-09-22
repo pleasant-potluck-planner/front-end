@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { Link } from "react-router-dom";
 
 import AddItemForm from "./AddItemForm";
 
@@ -6,13 +7,34 @@ import axios from "axios";
 
 const OrganizerEventUpdate = (props) => {
   const { eventInfo, setEventInfo } = props;
+
+  const [event, setEvent] = useState({
+    potluck_id: 1,
+    potluck_name: "John's Potluck",
+    potluck_location: "John's House",
+    potluck_time: "18:00:00",
+    potluck_date: "2022-02-10",
+    organizer: "John",
+    items: [
+      {
+        item_name: "Chocolate Cake",
+        guestBringingItem: "John",
+      },
+      {
+        item_name: "Red Wine",
+        guestBringingItem: "John",
+      },
+    ],
+  });
+
   useEffect(() => {
     // axios get request to populate input fields with current data
+    // get data using id, populate into setEvent
   });
 
   const handleChange = (e) => {
-    setEventInfo({
-      ...eventInfo,
+    setEvent({
+      ...event,
       [e.target.name]: e.target.value,
     });
   };
@@ -20,6 +42,7 @@ const OrganizerEventUpdate = (props) => {
   const handleSubmit = (e) => {
     e.preventDefault();
     // axios put request to update event info
+    // use event state info to post
   };
 
   const deleteItem = (itemToDelete) => {
@@ -30,14 +53,14 @@ const OrganizerEventUpdate = (props) => {
     <div>
       <form onSubmit={handleSubmit}>
         <div>
-          <h4>update your event named {eventInfo.name}.</h4>
+          <h4>update your event named {event.potluck_name}.</h4>
         </div>
 
         <div>
           <div>
             <label>Name</label>
             <input
-              value={eventInfo.name}
+              value={event.potluck_name}
               onChange={handleChange}
               name="name"
               type="text"
@@ -46,7 +69,7 @@ const OrganizerEventUpdate = (props) => {
           <div>
             <label>Date</label>
             <input
-              value={eventInfo.date}
+              value={event.potluck_date}
               onChange={handleChange}
               name="date"
               type="text"
@@ -55,7 +78,7 @@ const OrganizerEventUpdate = (props) => {
           <div>
             <label>Time</label>
             <input
-              value={eventInfo.time}
+              value={event.potluck_time}
               onChange={handleChange}
               name="time"
               type="text"
@@ -64,7 +87,7 @@ const OrganizerEventUpdate = (props) => {
           <div>
             <label>Location</label>
             <input
-              value={eventInfo.location}
+              value={event.potluck_location}
               onChange={handleChange}
               name="location"
               type="text"
@@ -73,9 +96,9 @@ const OrganizerEventUpdate = (props) => {
 
           <div>
             <AddItemForm
-              items={eventInfo.items}
-              eventInfo={eventInfo}
-              setEventInfo={setEventInfo}
+              items={event.items}
+              event={event}
+              setEvent={setEvent}
               deleteItem={deleteItem}
             />
           </div>
@@ -83,9 +106,9 @@ const OrganizerEventUpdate = (props) => {
 
         <div>
           <input type="submit" value="Update Event" />
-          {/* <Link to={'/home/'}> */}
-          <input type="button" value="Cancel" />
-          {/* </Link> */}
+          <Link to={"/potluck"}>
+            <input type="button" value="Cancel" />
+          </Link>
         </div>
       </form>
     </div>
