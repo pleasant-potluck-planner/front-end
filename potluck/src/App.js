@@ -1,112 +1,94 @@
-import React, { useState, useEffect } from "react";
-import {
-  BrowserRouter as Router,
-  Route,
-  Switch,
-  Link,
-  Redirect,
-} from "react-router-dom";
+
+// import logo from './logo.svg';
+// import './App.css';
+
+// function App() {
+//   return (
+//     <div className="App">
+//       <header className="App-header">
+//         <img src={logo} className="App-logo" alt="logo" />
+//         <p>
+//           Edit <code>src/App.js</code> and save to reload.
+//         </p>
+//         <a
+//           className="App-link"
+//           href="https://reactjs.org"
+//           target="_blank"
+//           rel="noopener noreferrer"
+//         >
+//           Learn React
+//         </a>
+//       </header>
+//     </div>
+//   );
+// }
+
+// export default App;
+
+import React, { Component } from "react";
+import { BrowserRouter as Router, Route, NavLink } from "react-router-dom";
+import RegisterForm from "./components/Register";
+import LoginForm from "./components/Login";
+import { loginImg } from './components/Loginimg' 
 
 import "./App.css";
 
-import axios from "axios";
-
-import OrganizerEventUpdate from "./components/OrganizerEventUpdate";
-import GuestEventUpdate from "./components/GuestEventUpdate";
-import MyPotlucks from "./components/MyPotlucks";
-
-function App() {
-  const [eventInfo, setEventInfo] = useState([
-    {
-      potluck_id: 1,
-      potluck_name: "John's Potluck",
-      potluck_location: "John's House",
-      potluck_time: "18:00:00",
-      potluck_date: "2022-02-10",
-      organizer: "John",
-      items: [
-        {
-          item_name: "Chocolate Cake",
-          guestBringingItem: "John",
-        },
-        {
-          item_name: "Red Wine",
-          guestBringingItem: "John",
-        },
-      ],
-    },
-  ]);
-
-  // useEffect(() => {
-  //   axios
-  //     .get('https://potluck-planner-5.herokuapp.com/api/potlucks')
-  //     .then(res => {
-  //        console.log(res)
-  //        setEventInfo(res.data)
-  //    })
-  //     .catch(err => {
-  //        console.log(err)
-  //    })
-  // })
-
-  return (
-    <Router>
-      <div className="homeBackground">
-        <header>
-          <nav className="nav">
-            <div className="title">
-              <h1>Potluck Organizer</h1>
+class App extends Component {
+  render() {
+    return (
+      <Router>
+        <div className="App">
+          <div className="appAside">
+            <div className="headerAside">
+            <img src= {loginImg}></img>
             </div>
-            <div className="links">
-              <Link to="/login">Log In</Link>
-              <Link to="/logout">Log Out</Link>
-              <Link to="/create">Start a Potluck</Link>
-              <Link to="/potluck">My Potlucks</Link>
             </div>
-          </nav>
-        </header>
+          <div className="appForm">
+            <div className="pageSwitcher">
+              <NavLink
+                to="/sign-in"
+                activeClassName="pageSwitcherItem-active"
+                className="pageSwitcherItem"
+              >
+                Login
+              </NavLink>
+              <NavLink
+                exact
+                to="/"
+                activeClassName="pageSwitcherItem-active"
+                className="pageSwitcherItem"
+              >
+                Register
+              </NavLink>
+            </div>
 
-        <div>
-          <Switch>
-            <Route
-              path="/potluck/orgupdate/:id"
-              render={(props) => (
-                <OrganizerEventUpdate
-                  {...props}
-                  eventInfo={eventInfo}
-                  setEventInfo={setEventInfo}
-                />
-              )}
-            />
-            <Route
-              path="/potluck/guestupdate/:id"
-              render={(props) => (
-                <GuestEventUpdate
-                  {...props}
-                  eventInfo={eventInfo}
-                  setEventInfo={setEventInfo}
-                />
-              )}
-              component={GuestEventUpdate}
-            />
-            <Route
-              path="/potluck"
-              render={(props) => (
-                <MyPotlucks
-                  {...props}
-                  eventInfo={eventInfo}
-                  setEventInfo={setEventInfo}
-                />
-              )}
-            />
-            <Route path="/">
-              <Redirect to="/potluck" />
-            </Route>
-          </Switch>
+            <div className="formTitle">
+              <NavLink
+                to="/sign-in"
+                activeClassName="formTitleLink-active"
+                className="formTitleLink"
+              >
+                Login
+              </NavLink>{" "}
+              or{" "}
+              <NavLink
+                exact
+                to="/"
+                activeClassName="formTitleLink-active"
+                className="formTitleLink"
+              >
+                Register
+              </NavLink>
+            </div>
+
+            <Route exact path="/" component={RegisterForm} />
+            <Route path="/sign-in" component={LoginForm} />
+          </div>
         </div>
-      </div>
-    </Router>
-  );
+      </Router>
+    );
+  }
+
 }
 
 export default App;
