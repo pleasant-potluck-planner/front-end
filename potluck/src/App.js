@@ -1,6 +1,5 @@
 import "./App.css";
 // import AddEvent from "./Components/CreateEvent";
-import { useState, useEffect } from "react";
 import {
   BrowserRouter as Router,
   Route,
@@ -13,24 +12,9 @@ import OrganizerEventUpdate from "./components/OrganizerEventUpdate";
 import RegisterForm from "./components/RegisterForm";
 import LoginForm from "./components/Login";
 import { loginImg } from "./components/Loginimg";
-import axios from "axios";
 import "./App.css";
 
 function App() {
-  const [potlucks, setPotlucks] = useState([]);
-
-  useEffect(() => {
-    axios
-      .get("https://potluck-planner-5.herokuapp.com/api/potlucks/1")
-      .then((res) => {
-        console.log(res);
-        setPotlucks(res.data);
-      })
-      .catch((err) => {
-        console.log(err);
-      });
-  }, []);
-
   return (
     <Router>
       <div className="App">
@@ -80,23 +64,11 @@ function App() {
           <Switch>
             <Route
               path="/potlucks/orgupdate/:id"
-              render={(props) => (
-                <OrganizerEventUpdate
-                  {...props}
-                  potlucks={potlucks}
-                  setPotlucks={setPotlucks}
-                />
-              )}
+              render={(props) => <OrganizerEventUpdate {...props} />}
             />
             <Route
               path="/potlucks"
-              render={(props) => (
-                <MyPotlucks
-                  {...props}
-                  potlucks={potlucks}
-                  setPotlucks={setPotlucks}
-                />
-              )}
+              render={(props) => <MyPotlucks {...props} />}
             />
 
             <Route path="/register" component={RegisterForm} />
