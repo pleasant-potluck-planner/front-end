@@ -23,7 +23,8 @@ function App() {
     axios
       .get("https://potluck-planner-5.herokuapp.com/api/potlucks/1")
       .then((res) => {
-        setPotlucks([res.data]);
+        console.log(res);
+        setPotlucks(res.data);
       })
       .catch((err) => {
         console.log(err);
@@ -35,7 +36,7 @@ function App() {
       <div className="App">
         <div className="appAside">
           <div className="headerAside">
-            <img src={loginImg}></img>
+            <img src={loginImg} alt="potluck"></img>
           </div>
         </div>
         <div className="appForm">

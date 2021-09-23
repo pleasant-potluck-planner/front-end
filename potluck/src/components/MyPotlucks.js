@@ -1,11 +1,11 @@
-import React, { useState } from "react";
+import React from "react";
 
 import OrganizerEventList from "./OrganizerEventList";
 import GuestEventList from "./GuestEventList";
 
 const MyPotlucks = (props) => {
   const { potlucks, setPotlucks } = props;
-  const [user, setUser] = useState("John"); // logged in user
+
   return (
     <section>
       <div>
@@ -22,9 +22,7 @@ const MyPotlucks = (props) => {
           </thead>
           <tbody>
             {potlucks.map((item) => {
-              if (item.organizer === user) {
-                return <OrganizerEventList key={item.potluck_id} item={item} />;
-              }
+              return <OrganizerEventList key={item.potluck_id} item={item} />;
             })}
           </tbody>
         </table>
@@ -44,9 +42,7 @@ const MyPotlucks = (props) => {
           </thead>
           <tbody>
             {potlucks.map((item) => {
-              if (item.organizer === user) {
-                return <GuestEventList key={item.potluck_id} item={item} />;
-              }
+              return <GuestEventList key={item.potluck_id} item={item} />;
             })}
           </tbody>
         </table>

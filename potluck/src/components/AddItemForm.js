@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 
-import FoodItem from "./FoodItem";
+// import FoodItem from "./FoodItem";
 
 const AddItemForm = (props) => {
   const { items, potluck, setPotluck, deleteItem } = props;
@@ -17,6 +17,7 @@ const AddItemForm = (props) => {
   };
 
   const handleSubmit = (e) => {
+    e.preventDefault();
     setPotluck({
       ...potluck,
       items: [...items, foodItem],
@@ -45,9 +46,9 @@ const AddItemForm = (props) => {
               </tr>
             </thead>
             <tbody>
-              {items.map((item, index) => (
+              {/* {items.map((item, index) => (
                 <FoodItem key={index} item={item} deleteItem={deleteItem} />
-              ))}
+              ))} */}
             </tbody>
           </table>
         </div>

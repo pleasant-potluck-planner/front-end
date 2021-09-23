@@ -1,77 +1,78 @@
-import React, { Component } from "react";
-import { Link } from "react-router-dom";
+import React, { useState } from "react";
+import { Link, useHistory } from "react-router-dom";
+import axios from "axios";
 
-class LoginForm extends Component {
-  constructor() {
-    super();
+const LoginForm = () => {
+  const { push } = useHistory();
 
-    this.state = {
-      email: "",
-      password: "",
-    };
+  const [credentials, setCredentials] = useState({
+    user_name: "",
+    user_password: "",
+  });
 
-    this.handleChange = this.handleChange.bind(this);
-    this.handleSubmit = this.handleSubmit.bind(this);
-  }
-
-  handleChange(event) {
-    let target = event.target;
-    let value = target.type === "checkbox" ? target.checked : target.value;
-    let name = target.name;
-
-    this.setState({
-      [name]: value,
+  const handleChange = (e) => {
+    setCredentials({
+      ...credentials,
+      [e.target.name]: e.target.value,
     });
-  }
+  };
 
-  handleSubmit(event) {
-    event.preventDefault();
-  }
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    axios
+      .post("https://potluck-planner-5.herokuapp.com/api/login", credentials)
+      .then((res) => {
+        console.log(res);
+        // localStorage.setItem('token', res.data)
+        push("/potlucks");
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
 
-  render() {
-    return (
-      <div className="formCenter">
-        <form className="formFields" onSubmit={this.handleSubmit}>
-          <div className="formField">
-            <label className="formFieldLabel" htmlFor="email">
-              Username
-            </label>
-            <input
-              type="email"
-              id="email"
-              className="formFieldInput"
-              placeholder="Enter username"
-              name="email"
-              value={this.state.email}
-              onChange={this.handleChange}
-            />
-          </div>
+  return (
+    <div className="formCenter">
+      <form className="formFields" onSubmit={handleSubmit}>
+        <div className="formField">
+          <label className="formFieldLabel" htmlFor="email">
+            Username
+          </label>
+          <input
+            type="text"
+            id="email"
+            className="formFieldInput"
+            placeholder="Enter username"
+            name="user_name"
+            value={credentials.user_name}
+            onChange={handleChange}
+          />
+        </div>
 
-          <div className="formField">
-            <label className="formFieldLabel" htmlFor="password">
-              Password
-            </label>
-            <input
-              type="password"
-              id="password"
-              className="formFieldInput"
-              placeholder="Enter your password"
-              name="password"
-              value={this.state.password}
-              onChange={this.handleChange}
-            />
-          </div>
+        <div className="formField">
+          <label className="formFieldLabel" htmlFor="password">
+            Password
+          </label>
+          <input
+            type="text"
+            id="password"
+            className="formFieldInput"
+            placeholder="Enter your password"
+            name="user_password"
+            value={credentials.user_password}
+            onChange={handleChange}
+          />
+        </div>
 
-          <div className="formField">
-            <button className="formFieldButton">Sign In</button>{" "}
-            <Link to="/register" className="formFieldLink">
-              Create an account
-            </Link>
-          </div>
-        </form>
-      </div>
-    );
-  }
-}
+        <div className="formField">
+          <button className="formFieldButton">Sign In</button>{" "}
+          <Link to="/register" className="formFieldLink">
+            Create an account
+          </Link>
+        </div>
+      </form>
+    </div>
+  );
+};
 
 export default LoginForm;

@@ -5,7 +5,7 @@ const FoodItem = (props) => {
   const { id } = useParams();
 
   const handleDelete = (e) => {
-    props.deleteItem(id);
+    props.deleteItem(id, props.item.item_name);
   };
 
   return (

@@ -14,23 +14,19 @@ const OrganizerEventUpdate = (props) => {
     potluck_location: "",
     potluck_time: "",
     potluck_date: "",
-    organizer: "",
-    items: [],
+    user_id: "",
   });
 
   useEffect(() => {
-    // axios get request to populate input fields with current data
-    // get data using id, populate into setEvent
     axios
       .get(`https://potluck-planner-5.herokuapp.com/api/potlucks/${id}`)
       .then((res) => {
-        console.log(res.data);
-        setPotluck(res.data);
+        setPotluck(res.data[0]);
       })
       .catch((err) => {
         console.log(err);
       });
-  }, []);
+  }, [id]);
 
   const handleChange = (e) => {
     setPotluck({
@@ -43,10 +39,38 @@ const OrganizerEventUpdate = (props) => {
     e.preventDefault();
     // axios put request to update event info
     // use event state info to post
+    axios
+      .put(`https://potluck-planner-5.herokuapp.com/api/potlucks/${id}`)
+      .then((res) => {
+        console.log(res);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
   };
 
-  const deleteItem = (itemToDelete) => {
-    // axios delete request to update eventInto.items
+  const deleteItem = (id, itemToDelete) => {
+    axios
+      .delete(
+        `https://potluck-planner-5.herokuapp.com/api/potlucks/${itemToDelete}/${id}`
+      )
+      .then((res) => {
+        console.log(res);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
+
+  const deleteEvent = (id) => {
+    axios
+      .delete(`https://potluck-planner-5.herokuapp.com/api/potlucks:${id}`)
+      .then((res) => {
+        console.log(res);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
   };
 
   return (
@@ -96,7 +120,7 @@ const OrganizerEventUpdate = (props) => {
 
           <div>
             <AddItemForm
-              items={potluck.items}
+              items={potluck}
               potluck={potluck}
               setPotluck={setPotluck}
               deleteItem={deleteItem}
@@ -106,6 +130,7 @@ const OrganizerEventUpdate = (props) => {
 
         <div>
           <input type="submit" value="Update Event" />
+          <button onClick={deleteEvent}>Delete Event</button>
           <Link to={"/potlucks"}>
             <input type="button" value="Cancel" />
           </Link>

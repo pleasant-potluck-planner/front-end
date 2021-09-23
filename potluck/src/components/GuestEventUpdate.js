@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 
 import GuestFoodList from "./GuestFoodList";
 
-import axios from "axios";
+// import axios from "axios";
 
 const GuestEventUpdate = (props) => {
   const { eventInfo, setEventInfo } = props;
