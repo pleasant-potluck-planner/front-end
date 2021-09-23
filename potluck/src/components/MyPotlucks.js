@@ -1,10 +1,22 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
+import axios from "axios";
 
 import OrganizerEventList from "./OrganizerEventList";
 import GuestEventList from "./GuestEventList";
 
 const MyPotlucks = (props) => {
-  const { potlucks, setPotlucks } = props;
+  const [potlucks, setPotlucks] = useState([]);
+
+  useEffect(() => {
+    axios
+      .get("https://potluck-planner-5.herokuapp.com/api/potlucks/1")
+      .then((res) => {
+        setPotlucks(res.data);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  }, []);
 
   return (
     <section>

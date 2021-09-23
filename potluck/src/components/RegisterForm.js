@@ -6,7 +6,6 @@ const RegisterForm = () => {
   const { push } = useHistory();
 
   const [credentials, setCredentials] = useState({
-    user_id: Date.now(),
     user_name: "",
     user_password: "",
   });
