@@ -21,10 +21,7 @@ const RegisterForm = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
     axios
-      .post(
-        "https://potluck-planner-5.herokuapp.com/api/auth/register",
-        credentials
-      )
+      .post("https://potluck-planner-5.herokuapp.com/api/register", credentials)
       .then((res) => {
         console.log(res);
         // localStorage.setItem('token', res.data)
