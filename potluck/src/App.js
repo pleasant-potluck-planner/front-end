@@ -1,5 +1,3 @@
-import "./App.css";
-// import AddEvent from "./Components/CreateEvent";
 import {
   BrowserRouter as Router,
   Route,
@@ -7,8 +5,8 @@ import {
   Switch,
   Redirect,
 } from "react-router-dom";
+
 import MyPotlucks from "./components/MyPotlucks";
-import OrganizerEventUpdate from "./components/OrganizerEventUpdate";
 import RegisterForm from "./components/RegisterForm";
 import LoginForm from "./components/Login";
 import { loginImg } from "./components/Loginimg";
@@ -63,14 +61,9 @@ function App() {
 
           <Switch>
             <Route
-              path="/potlucks/orgupdate/:id"
-              render={(props) => <OrganizerEventUpdate {...props} />}
-            />
-            <Route
               path="/potlucks"
               render={(props) => <MyPotlucks {...props} />}
             />
-
             <Route path="/register" component={RegisterForm} />
             <Route path="/sign-in" component={LoginForm} />
             <Route path="/">

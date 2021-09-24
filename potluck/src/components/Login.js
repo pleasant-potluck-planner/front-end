@@ -24,6 +24,7 @@ const LoginForm = () => {
       .then((res) => {
         console.log(res);
         // localStorage.setItem('token', res.data)
+        // localStorage.setItem('username', res.data)
         push("/potlucks");
       })
       .catch((err) => {

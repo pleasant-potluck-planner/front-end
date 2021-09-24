@@ -7,6 +7,7 @@ import axios from "axios";
 
 const OrganizerEventUpdate = (props) => {
   const { id } = useParams();
+  const { setPotlucks } = props;
 
   const [potluck, setPotluck] = useState({
     potluck_id: "",
@@ -30,7 +31,6 @@ const OrganizerEventUpdate = (props) => {
 
   const handleChange = (e) => {
     setPotluck({
-      ...potluck,
       [e.target.name]: e.target.value,
     });
   };
@@ -54,17 +54,6 @@ const OrganizerEventUpdate = (props) => {
       .delete(
         `https://potluck-planner-5.herokuapp.com/api/potlucks/${itemToDelete}/${id}`
       )
-      .then((res) => {
-        console.log(res);
-      })
-      .catch((err) => {
-        console.log(err);
-      });
-  };
-
-  const deleteEvent = (id) => {
-    axios
-      .delete(`https://potluck-planner-5.herokuapp.com/api/potlucks:${id}`)
       .then((res) => {
         console.log(res);
       })
@@ -130,7 +119,6 @@ const OrganizerEventUpdate = (props) => {
 
         <div>
           <input type="submit" value="Update Event" />
-          <button onClick={deleteEvent}>Delete Event</button>
           <Link to={"/potlucks"}>
             <input type="button" value="Cancel" />
           </Link>
